@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  python_min: "3.11"
+  version: "1.0.1"
+
+package:
+  name: giso
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/g/giso/giso-${{ version }}.tar.gz
+  sha256: 22fc25d41bb4d1b4d1c9b8afe6a4d750e466f2cf6a0ed6cab20e5f86decb6911
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - giso = giso._cli:cli
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - hatchling
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - geoarrow-pyarrow >=0.2.0
+    - geopandas >=1.0.0
+    - rich-click >=1.9.0
+    - sedonadb >=0.3.0
+
+tests:
+  - python:
+      imports:
+        - giso
+      pip_check: true
+      python_version: ${{ python_min }}.*
+  - requirements:
+      run:
+        - pip
+        - python ${{ python_min }}.*
+    script:
+      - giso --help
+
+about:
+  summary: A simple command line tool to help with geocoding country/region ISO 3166-2 codes
+  license: MIT
+  license_file: LICENSE
+  homepage: https://pypi.org/project/giso/
+
+extra:
+  recipe-maintainers:
+    - p-vdp
