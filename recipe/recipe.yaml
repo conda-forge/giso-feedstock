@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/g/giso/giso-${{ version }}.tar.gz
-  sha256: 83057c2fa8b5a98eccc14b4dfb01f3476497d7fdba7d0ab2ab1977ba510e7f5c
+  sha256: 26af4dab78423f548b0e451dc2e6213768632a2126cc62666920ca6fdb47400e
 
 build:
   number: 0
